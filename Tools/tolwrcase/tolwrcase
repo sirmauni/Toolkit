@@ -1,0 +1,20 @@
+#!/usr/bin/python3
+
+import sys
+
+if len(sys.argv) < 2:
+	print("No arguments passed!")
+	sys.exit(0)
+
+# get arguments 
+arguments = sys.argv[1:]
+
+if len(arguments) <= 0:
+	sys.exit(1)
+
+# for each argument,
+convertedArgStr = ""
+for arg in arguments:
+	convertedArgStr = convertedArgStr + " " + arg.lower()
+
+print(convertedArgStr)

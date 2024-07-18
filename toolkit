@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+
+# Toolkit: an ongoing commandline toolkit
+
+import sys
+import subprocess
+
+from TLKConfig import TLKConfig
+
+# init Toolkit config
+TLKConfig = TLKConfig()
+numArgs = len(sys.argv)
+
+# check if arguments passed
+if numArgs < 2:
+    print("Missing arg 1")
+    sys.exit(1)
+
+# determine tool to execute based on argument passed
+tool = sys.argv[1]
+if tool == "help":
+    print("Outlining tool!")
+elif tool == "list":
+    print("list of supported tools:")
+
+    # load list of supported tools from toolkit.yaml file
+    print("(" + str(TLKConfig.getSupportedToolCount()) + ") supported ")
+
+elif tool == "info":
+    # check for tool name argument
+    if numArgs < 3:
+        raise Exception("Missing tool name for info")
+    
+    toolName = sys.argv[2]
+    
+    # print details for tool
+    print(TLKConfig.getToolInfo(toolName))
+else:
+    toolName = tool
+    additionalArgs = sys.argv[2:]
+    additionalArgsCount = len(additionalArgs)
+
+    # check if tool's min argument requirement
+    minExecArgs = TLKConfig.getToolMinArguments(toolName)
+    if additionalArgsCount < minExecArgs:
+        raise Exception("Expected " + str(minExecArgs) + " arguments, passed " + str(additionalArgsCount))
+    
+    # get exec dir
+    exec = [TLKConfig.getToolExecutable(toolName)] + additionalArgs
+
+    subprocess.call(exec)
+    
+
