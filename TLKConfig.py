@@ -10,6 +10,7 @@ class TLKConfig:
     def __init__(self):
         with open("./toolkit_config.yaml") as config_yaml:
             self.tConfig = yaml.safe_load(config_yaml)
+            config_yaml.close()
 
         # check if any tools were passed
         if self.tConfig["tools"] == None or len(self.tConfig["tools"]) <= 0:
