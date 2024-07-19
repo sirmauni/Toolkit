@@ -8,3 +8,7 @@ tools:
     exec: "/Tools/hostfileswap/hostfileswap"
     minArgs: 0
     command: "python3"
+  compoundinterest:
+    exec: "/Tools/compoundinterest/compoundinterest"
+    minArgs: 1
+    command: "python3"
