@@ -8,7 +8,7 @@ class TLKConfig:
     tConfig = None
 
     def __init__(self):
-        with open("./toolkit_config.yaml") as config_yaml:
+        with open(os.path.dirname(os.path.realpath(__file__)) + "/toolkit_config.yaml") as config_yaml:
             self.tConfig = yaml.safe_load(config_yaml)
             config_yaml.close()
 
@@ -37,7 +37,7 @@ class TLKConfig:
                 raise Exception("No executable described for tool (" + tool + ")")
             
             # check if executable file exists
-            if os.path.exists(self.tConfig["tools"][tool]["exec"]) != True:
+            if os.path.exists(os.path.dirname(os.path.realpath(__file__)) + self.tConfig["tools"][tool]["exec"]) != True:
                 raise Exception("Executable '" + tool + "' not found")
             
             # check if tool minimum number of arguments is valid
