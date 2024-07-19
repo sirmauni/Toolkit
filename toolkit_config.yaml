@@ -1,0 +1,10 @@
+# toolkit config
+tools: 
+  tolwrcase:
+    exec: "/Tools/tolwrcase/tolwrcase"
+    minArgs: 1
+    command: "python3"
+  hostfileswap:
+    exec: "/Tools/hostfileswap/hostfileswap"
+    minArgs: 0
+    command: "python3"
