@@ -1,0 +1,8 @@
+# toolkit config
+tools: 
+  tolwrcase:
+    exec: "./toolkit/Tools/tolwrcase/tolwrcase"
+    minArgs: 1
+  hostfileswap:
+    exec: "./toolkit/Tools/hostfileswap/hostfileswap"
+    minArgs: 0
