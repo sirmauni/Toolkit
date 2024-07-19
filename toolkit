@@ -3,6 +3,7 @@
 # Toolkit: an ongoing commandline toolkit
 
 import sys
+import os
 import subprocess
 
 from TLKConfig import TLKConfig
@@ -45,8 +46,11 @@ else:
     if additionalArgsCount < minExecArgs:
         raise Exception("Expected " + str(minExecArgs) + " arguments, passed " + str(additionalArgsCount))
     
+    # change directory to dir of executable
+    os.chdir("./Tools/" + toolName)
+
     # get exec dir
-    exec = [TLKConfig.getToolExecutable(toolName)] + additionalArgs
+    exec = ["./" + toolName] + additionalArgs
 
     subprocess.call(exec)
     
