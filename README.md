@@ -6,7 +6,7 @@ Tested on Mac only (currently)
 
 ## Getting Started
 
-1. Download the toolkit install file: [toolkit_install](https://raw.githubusercontent.com/sirmauni/Toolkit/dev.jamauni/toolkit)
+1. Download the toolkit install file: [toolkit_install](https://raw.githubusercontent.com/sirmauni/Toolkit/main/toolkit_install)
 2. Run the install toolkit via Terminal/CMD
 3. Test toolkit via Termianl/CMD
 ```
