@@ -1,0 +1,99 @@
+#!/usr/bin/python3
+import os
+import sys
+import configparser
+
+# check if process run by root
+if os.getuid() != 0:
+    #prompt user that root is required
+    print("Super user required!")
+
+    # exit
+    sys.exit(0)
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+# check if default host file exists
+if config["DEFAULT"]["default"] == None: 
+    raise Exception('No default host config found')
+
+if os.path.exists(config["DEFAULT"]["default"]) != True:
+    raise Exception('No default host file found')
+
+# set default host file
+defHostFile = config["DEFAULT"]["default"]
+
+# check if dev host file exists
+if config["DEFAULT"]["dev"] == None: 
+    raise Exception('No dev host config found')
+
+if os.path.exists(config["DEFAULT"]["dev"]) != True:
+    raise Exception('No dev host file found')
+
+# set dev host file
+devHostFile = config["DEFAULT"]["dev"]
+
+# variables
+data_arr = []
+hosts_data = None
+hosts_default_data = None
+hosts_dev_data = None
+
+def setHostsDefault():
+    with open("/etc/hosts", "w") as file:
+        # write default hosts data
+        for line in hosts_default_data:
+            file.write(line + "\n")
+
+        # prompt changes
+        print("Host set to default!")
+
+        # close file
+        file.close()
+
+def setHostsDeveloperMode():
+    with open("/etc/hosts", "w") as file:
+        # write dev signal
+        file.write("#[default_signal]\n")
+
+        # write developer hosts data to host file
+        for line in host_dev_data:
+            file.write(line + "\n")
+
+        # prompt changes
+        print("Host set to developer mode!")
+
+        # close file
+        file.close()
+        
+# check if cmode execution is for status
+if len(sys.argv) > 1 and "-s" == sys.argv[1]:
+    # print current hosts config to console
+    with open("/etc/hosts", "r") as file:
+        print(file.read())
+        file.close()
+else:
+    # gather data from hosts file
+    with open("/etc/hosts", "r") as file:
+        hosts_data = file.read().split("\n")
+        file.close()
+
+    # gather default hosts data
+    with open(defHostFile, "r") as file:
+        hosts_default_data = file.read().split("\n")
+        file.close()
+
+    # gather data from development hosts file
+    with open(devHostFile, "r") as file:
+        host_dev_data = file.read().split("\n")
+        file.close()
+
+    # host data not equal to default data
+    if "#[default_signal]" in hosts_data:
+        # set hosts file to default mode
+        setHostsDefault()
+    # else
+    else:
+        # set hosts file to default
+        setHostsDeveloperMode()

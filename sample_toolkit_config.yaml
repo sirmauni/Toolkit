@@ -1,0 +1,11 @@
+# toolkit config
+tools: 
+  tolwrcase:
+    exec: "/path/to/executable"
+    minArgs: 1
+  tolwrcase2:
+    exec: "/path/to/executable"
+    minArgs: 2
+  tolwrcase3:
+    exec: "/path/to/executable"
+    minArgs: 3
