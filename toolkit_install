@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# cleanup current files/directories
+rm -r ~/toolkit 2> /dev/null
+rm ./toolkit.zip 2> /dev/null
+rm ~/.bin/toolkit 2> /dev/null
+
+# make dir for application
+mkdir ~/toolkit
+
+# download app zip
+curl -s -L https://github.com/sirmauni/Toolkit/raw/dev.jamauni/toolkit.zip -o ./toolkit.zip
+
+# unpack app zip
+unzip -o -q toolkit.zip -d ~/toolkit
+
+# create link to toolkit in user's bin folder
+ln -s ~/toolkit/app/toolkit ~/.bin/toolkit
+
+# delete zip file
+rm ./toolkit.zip 2> /dev/null
+
+# present user with success
+echo "Toolkit installed"
+toolkit help
