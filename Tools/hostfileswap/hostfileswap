@@ -12,7 +12,7 @@ if os.getuid() != 0:
     sys.exit(0)
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read('./config.ini')
 
 # check if default host file exists
 if config["DEFAULT"]["default"] == None: 
