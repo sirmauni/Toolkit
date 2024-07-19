@@ -71,6 +71,15 @@ class TLKConfig:
             ToolInfo = ToolInfo + "\t" + toolAttr + ": " + str(self.tConfig["tools"][toolName][toolAttr]) + "\n"
 
         return ToolInfo
+    
+    def getToolCommand(self, toolName):
+        # check if tool exist
+        if self.toolExists(toolName) != True:
+            raise Exception("Tool '" + toolName + "' Does Not Exists")
+        
+        # fetch executable dir
+        return self.tConfig["tools"][toolName]["command"]
+
 
     def getToolExecutable(self, toolName):
         # check if tool exist

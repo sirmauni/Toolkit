@@ -45,12 +45,9 @@ else:
     minExecArgs = TLKConfig.getToolMinArguments(toolName)
     if additionalArgsCount < minExecArgs:
         raise Exception("Expected " + str(minExecArgs) + " arguments, passed " + str(additionalArgsCount))
-    
-    # change directory to dir of executable
-    os.chdir("./Tools/" + toolName)
 
     # get exec dir
-    exec = ["./" + toolName] + additionalArgs
+    exec = [TLKConfig.getToolCommand(toolName), os.path.dirname(os.path.realpath(__file__)) + TLKConfig.getToolExecutable(toolName)] + additionalArgs
 
     subprocess.call(exec)
     
