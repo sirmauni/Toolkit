@@ -12,3 +12,7 @@ tools:
     exec: "/Tools/compoundinterest/compoundinterest"
     minArgs: 1
     command: "python3"
+  urlchecker:
+    exec: "/Tools/urlchecker/urlchecker"
+    minArgs: 0
+    command: "python3"
